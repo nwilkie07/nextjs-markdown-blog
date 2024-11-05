@@ -1,0 +1,54 @@
+.imageWrapper {
+    display: block;
+    position: relative;
+    border-radius: 4px;
+    display: flex;
+    height: 56px;
+    margin-right: 8px;
+    overflow: hidden;
+    width: 40px;
+}
+
+.imageWrapper .customImg {
+    object-fit: cover;
+    filter: brightness(0.9);
+    transition: filter 0.3s;
+
+    &:hover {
+        filter: brightness(1);
+    }
+}
+
+.title {
+    display: flex;
+    margin: 0;
+}
+
+.navStyles {
+    display: flex;
+    flex: 1 0 0;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    margin: 20px 0;
+}
+
+.navStyles a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.headerStyles {
+    align-items: center;
+    display: flex;
+    padding: 20px 0px;
+}
+
+.headerStyles a {
+    align-items: center;
+    display: flex;
+}
