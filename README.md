@@ -1,36 +1,134 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+# Next.js Markdown Blog
+
+This project is a personal blog built with Next.js that uses Markdown files for content management. The application is designed to allow publishing of blog articles with structured metadata, organized content, and a minimalistic layout. Styled Components and various utilities are included to enhance the blogging experience and styling.
+
+![My Blog](https://objects-us-east-1.dream.io/az-assets/nextjs-markdown-blog.png)
+
+## Table of Contents
+
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Markdown Structure](#markdown-structure)
+- [Scripts](#scripts)
+- [Dependencies](#dependencies)
+- [License](#license)
+
+## Features
+
+- **Next.js**: A React framework that enables static and server-rendered pages.
+- **Markdown Support**: Easily write articles in Markdown with metadata.
+- **Dynamic Routing**: Each article is served with a unique route generated from the file name.
+- **Styled Components**: Uses Styled Components for styling the blog layout.
+- **Syntax Highlighting**: Highlight code blocks using `react-syntax-highlighter`.
+- **SEO-friendly Metadata**: Generate page metadata from each article's title.
+
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+Ensure you have the following tools installed:
+
+- **Node.js** (v18.x or later)
+- **npm** (v8.x or later)
+
+### Installation
+
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/andresz74/nextjs-markdown-blog.git
+   cd nextjs-markdown-blog
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Create a folder named `articles` in the root of the project. Add Markdown files in this folder to publish articles.
+
+### Running the Project
+
+To start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To build the project for production:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+To serve the production build locally:
 
-## Learn More
+```bash
+npm run start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Here's a breakdown of the core components and utilities used in this blog:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **`components/ArticleContent.tsx`**: Renders the main content of each article with Markdown formatting.
+- **`components/ArticleCard.tsx`**: Displays a brief preview of each article in the blog home.
+- **`utils/getArticleMetadata.ts`**: Utility to extract metadata from each Markdown file.
+- **`utils/getArticleContent.ts`**: Utility to retrieve and parse the content of each Markdown file.
 
-## Deploy on Vercel
+## Markdown Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Each Markdown file should contain front matter for metadata. Example structure:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```markdown
+---
+title: "The Arctic Predator"
+date: "2024-05-13"
+description: "Polar bears, majestic predators of the Arctic, are facing unprecedented challenges due to climate change..."
+---
+
+### The Arctic Predator
+
+Content goes here...
+```
+
+Place all your Markdown files in the `articles` folder. The filename will be used as the `slug` for routing.
+
+### Example of Generated Metadata
+
+Each page's metadata is generated dynamically to reflect the article title:
+
+- Page title: `My Blog - [Article Title]`
+- Description: Based on `description` in the article's front matter
+
+## Scripts
+
+- **`npm run dev`**: Starts the development server.
+- **`npm run build`**: Builds the application for production.
+- **`npm run start`**: Runs the built application in production mode.
+- **`npm run lint`**: Lints the project for code consistency.
+
+## Dependencies
+
+- **`next`**: Framework for React-based applications with static and server-rendered pages.
+- **`react`** and **`react-dom`**: Core libraries for building and rendering React components.
+- **`gray-matter`**: Parses front matter in Markdown files to extract metadata.
+- **`react-markdown`**: Renders Markdown content as React components.
+- **`remark-gfm`**: Adds GitHub-flavored Markdown support to `react-markdown`.
+- **`react-syntax-highlighter`**: Enables syntax highlighting for code blocks.
+- **`styled-components`**: CSS-in-JS library for styling components.
+
+### Dev Dependencies
+
+- **`@types/node`**: TypeScript type definitions for Node.js.
+- **`@types/react`** and **`@types/react-dom`**: TypeScript definitions for React.
+- **`eslint`** and **`eslint-config-next`**: Linter and Next.js-specific linting rules.
+- **`typescript`**: Static typing for JavaScript.
+
+## License
+
+This project is licensed under the MIT License.
