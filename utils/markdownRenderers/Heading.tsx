@@ -22,7 +22,7 @@ const Heading: React.FC<HeadingProps> = ({ level, children }) => {
 		case 6:
 			return <h6 className={styles.heading6}>{children}</h6>;
 		default:
-			return <>{children}</>;
+			return <h1 className={styles.heading1}>{children}</h1>;
 	}
 };
 

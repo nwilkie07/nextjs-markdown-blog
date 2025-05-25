@@ -1,3 +1,4 @@
+import React from 'react'; // Import React to avoid the test error
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Header.module.css';

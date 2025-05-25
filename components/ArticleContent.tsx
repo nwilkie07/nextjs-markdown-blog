@@ -14,7 +14,7 @@ const ArticleContent: React.FC<ArticleContentProps> = ({ articleContent, loading
         <main>
             {loading ? (
                 <div className={styles.loaderWrapper}>
-                    <div className={styles.spinner}></div>
+                    <div className={styles.spinner} data-testid="spinner"></div>
                 </div>
             ) : (
                 <article>
