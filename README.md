@@ -46,7 +46,7 @@ Ensure you have the following tools installed:
 2. Install dependencies:
 
    ```bash
-   npm install
+   yarn
    ```
 
 3. Create a folder named `articles` in the root of the project. Add Markdown files in this folder to publish articles.
@@ -56,19 +56,29 @@ Ensure you have the following tools installed:
 To start the development server:
 
 ```bash
-npm run dev
+yarn dev
 ```
 
 To build the project for production:
 
 ```bash
-npm run build
+yarn build
 ```
 
 To serve the production build locally:
 
 ```bash
-npm run start
+yarn start
+```
+
+To test the project:
+
+```bash
+yarn test
+```
+With coverage
+```bash
+yarn test --coverage
 ```
 
 ## Project Structure
