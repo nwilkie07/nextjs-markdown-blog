@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ArticleContent snapshot matches snapshot for simple markdown 1`] = `
+<div>
+  <main>
+    <article>
+      <h1>
+        Snapshot Test
+      </h1>
+      
+
+      <p>
+        This is 
+        <strong>
+          bold
+        </strong>
+         and 
+        <em>
+          italic
+        </em>
+        .
+      </p>
+    </article>
+  </main>
+</div>
+`;

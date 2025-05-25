@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Markdown rich content rendering renders code block 1`] = `
+<div>
+  <pre>
+    <div>
+      <div
+        style="background: rgb(40, 40, 40); color: rgb(171, 171, 171); text-shadow: 0 1px rgba(0, 0, 0, 0.3); font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; direction: ltr; text-align: left; white-space: pre; word-spacing: normal; word-break: normal; line-height: 1.5; tab-size: 2; hyphens: none; padding: 1em; margin: 0.5em 0px; overflow: auto; border-radius: 0.3em;"
+      >
+        <code
+          class="language-ts"
+          style="white-space: pre; background: rgb(40, 40, 40); color: rgb(171, 171, 171); text-shadow: 0 1px rgba(0, 0, 0, 0.3); font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; direction: ltr; text-align: left; word-spacing: normal; word-break: normal; line-height: 1.5; tab-size: 2; hyphens: none;"
+        >
+          <span
+            class="token"
+            style="color: rgb(120, 120, 120);"
+          >
+            const
+          </span>
+          <span>
+             x
+          </span>
+          <span
+            class="token"
+            style="color: rgb(97, 97, 97);"
+          >
+            :
+          </span>
+          <span>
+             
+          </span>
+          <span
+            class="token"
+            style="color: rgb(121, 121, 121);"
+          >
+            number
+          </span>
+          <span>
+             
+          </span>
+          <span
+            class="token"
+            style="color: rgb(97, 97, 97);"
+          >
+            =
+          </span>
+          <span>
+             
+          </span>
+          <span
+            class="token"
+            style="color: rgb(102, 102, 102);"
+          >
+            42
+          </span>
+          <span
+            class="token"
+            style="color: rgb(171, 171, 171);"
+          >
+            ;
+          </span>
+          <span>
+            
+
+          </span>
+        </code>
+      </div>
+    </div>
+  </pre>
+</div>
+`;
