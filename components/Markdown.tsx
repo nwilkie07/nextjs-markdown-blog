@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import CodeBlock from '@/utils/markdownRenderers/CodeBlock';
 import Heading from '@/utils/markdownRenderers/Heading';
+import HrNode from '@/utils/markdownRenderers/HrNode';
 import ImageNode from '@/utils/markdownRenderers/ImageNode';
 import LinkNode from '@/utils/markdownRenderers/LinkNode';
 import ListNode from '@/utils/markdownRenderers/ListNode';
@@ -53,6 +54,7 @@ const renderers: Components = {
 	h4: renderHeading(4),
 	h5: renderHeading(5),
 	h6: renderHeading(6),
+	hr: () => <HrNode />,
 	img: ({ alt, src, ...props }) => {
 		const resolvedAlt = alt ? alt : '';
 		const resolvedSrc = src ? src : '';
