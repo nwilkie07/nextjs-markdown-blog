@@ -1,7 +1,14 @@
+@import "/style/fa.all.css";
+
 :root {
 	--font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
 	  "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
 	  "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+	
+	--color-primary: #1e293b;
+	--color-secondary: #475569;
+	--color-soft-primary: #cbd5e1;
+	--color-soft-secondary: #e2e8f0;
 }
 * {
 	box-sizing: border-box;
@@ -15,7 +22,7 @@ body {
 	flex-direction: column;
 	padding: 14px;
 	min-height: 100vh;
-	color: #1e293b;
+	color: var(--color-primary);
 	gap: 14px;
 }
 
@@ -69,7 +76,7 @@ main {
 
 .articleCard > p {
 	/* flex: 1; */
-	color: #475569;
+	color: var(--color-secondary)
 }
 
 .statsContainer {

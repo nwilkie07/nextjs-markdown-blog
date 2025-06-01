@@ -34,7 +34,7 @@ const ArticlePage = (props: any) => {
 
 	// Use ArticleContent for client-side logic
 	return (
-		<ArticleContent articleContent={article.content} loading={false} />
+		<ArticleContent articleContent={article.content} articleTitle={article.data.title} folder='articles' loading={false} slug={slug} />
 	);
 };
 
