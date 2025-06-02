@@ -115,6 +115,27 @@ Each page's metadata is generated dynamically to reflect the article title:
 - Page title: `My Blog - [Article Title]`
 - Description: Based on `description` in the article's front matter
 
+### Sharing Articles
+
+Blog posts now include a share section with buttons for:
+
+- Twitter (X)
+- Facebook
+- LinkedIn
+- Reddit
+- Copy to clipboard
+
+These buttons appear at the bottom of each article and are dynamically generated based on the article's title and URL.
+To ensure correct sharing links, make sure to set the `NEXT_PUBLIC_BASE_URL` environment variable in your `.env.local` file:
+```
+NEXT_PUBLIC_BASE_URL=https://yourdomain.com
+````
+
+This is used to construct full URLs for sharing from the `ShareButtons` component:
+```
+<ShareButtons title={articleTitle} url={`${process.env.NEXT_PUBLIC_BASE_URL}/${folder}/${slug}`} />
+```
+
 ## Scripts
 
 - **`npm run dev`**: Starts the development server.

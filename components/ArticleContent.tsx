@@ -2,14 +2,18 @@
 
 import React from 'react';
 import Markdown from '@/components/Markdown';
+import ShareButtons from '@/components/ShareButtons';
 import styles from './ArticleContent.module.css';
 
 interface ArticleContentProps {
     articleContent: string | null;
+    articleTitle: string;
+    folder: string;
     loading: boolean;
+    slug: string;
 }
 
-const ArticleContent: React.FC<ArticleContentProps> = ({ articleContent, loading }) => {
+const ArticleContent: React.FC<ArticleContentProps> = ({ articleContent, articleTitle, folder, loading, slug }) => {
     return (
         <main>
             {loading ? (
@@ -18,6 +22,7 @@ const ArticleContent: React.FC<ArticleContentProps> = ({ articleContent, loading
                 </div>
             ) : (
                 <article>
+                    <ShareButtons title={articleTitle} url={`${process.env.NEXT_PUBLIC_BASE_URL}/${folder}/${slug}`} />
                     {articleContent ? <Markdown>{articleContent}</Markdown> : <p>Article not found.</p>}
                 </article>
             )}

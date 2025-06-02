@@ -3,7 +3,7 @@ title: "The Arctic Predator"
 date: 2024/05/13
 description: "Polar bears, majestic predators of the Arctic, are facing unprecedented challenges due to climate change. These creatures, perfectly adapted to their icy habitat, are now struggling to survive as their environment rapidly changes."
 ---
-### The Arctic Predator
+# The Arctic Predator
 
 Polar bears, majestic predators of the Arctic, are facing unprecedented challenges due to climate change. These creatures, perfectly adapted to their icy habitat, are now struggling to survive as their environment rapidly changes. 
 
@@ -42,5 +42,7 @@ Historically, during interglacial periods with lower ice cover, polar bears coul
 ### A Broader Reflection on Climate Change
 
 The fate of the polar bear is a poignant reminder of the far-reaching impacts of climate change. Their struggle reflects the broader challenges faced by numerous species as their habitats transform at an unprecedented rate. Addressing climate change is not just about preserving an iconic species; it's about maintaining the intricate balance of ecosystems that support life on Earth, including our own. The survival of polar bears hinges on our ability to mitigate climate change and protect their habitats, underscoring the urgent need for environmental stewardship and collective action.
+
+---
 
 https://medium.com/the-new-climate/longer-summers-and-the-fate-of-the-polar-bear-760770ae9b3a
