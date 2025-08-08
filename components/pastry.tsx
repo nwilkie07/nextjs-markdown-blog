@@ -69,7 +69,7 @@ export const Pastry = (props: Props) => {
 						</div>
 					</TextGrid>
 					<a
-						href={img}
+						href={image}
 						style={{border: "2px solid rgb(213, 166, 189)", display: "flex"}}
 					>
 						<img

@@ -92,7 +92,7 @@ interface Props {
 export const Sidebar = (props: Props) => {
 	const { setIsOpen, isOpen } = props;
 	return (
-		<Modal isOpen={isOpen} shouldCloseOnOverlayClick={true} onRequestClose={() => setIsOpen(false)} closeTimeout={500}>
+		<Modal isOpen={isOpen} shouldCloseOnOverlayClick={true} onRequestClose={() => setIsOpen(false)} closeTimeoutMS={500}>
 			<OuterContainer>
 				<SidebarTop>
 					<BackBar>
@@ -116,8 +116,8 @@ export const Sidebar = (props: Props) => {
 					<IntroOuter>
 						<h4>Adventures Abroad</h4>
 						<Intro>
-							Welcome to Nick and Jenna's Adventure's Abroad Blog! Enjoy posts about our travel adventures, reviews of
-							all the pastries we've tried from local patisseries, and more from our year living on the Franco-Swiss
+							Welcome to Nick and Jenna&apos;s Adventure&apos;s Abroad Blog! Enjoy posts about our travel adventures, reviews of
+							all the pastries we&apos;ve tried from local patisseries, and more from our year living on the Franco-Swiss
 							border;
 						</Intro>
 					</IntroOuter>
@@ -130,7 +130,9 @@ export const Sidebar = (props: Props) => {
 						</NavItem>
 						<NavItem>
 							<CakeRoundedIcon />
-							<text>Tasty Pasteries</text>
+							<a href="/pastries" style={{ textDecoration: 'none', color: 'inherit' }}>
+								<text>Tasty Pastries</text>
+							</a>
 						</NavItem>
 						<NavItem>
 							<PetsRoundedIcon />

@@ -56,7 +56,7 @@ const NavigationBar = () => {
 					<a href="/">Home</a>
 				</TopElement>
 				<TopElement>
-					<a href="/pastry-reviews">Tasty Pastries</a>
+					<a href="/pastries">Tasty Pastries</a>
 				</TopElement>
 				<TopElement>
 					<a href="/subscribe">Subscribe</a>
