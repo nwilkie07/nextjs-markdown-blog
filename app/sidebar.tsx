@@ -1,5 +1,41 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import React from 'react';
+
+const slideIn = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+const slideOut = keyframes`
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+`;
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
 
 const ModalOverlay = styled.div<{ $isOpen: boolean }>`
 	position: fixed;
@@ -8,15 +44,21 @@ const ModalOverlay = styled.div<{ $isOpen: boolean }>`
 	right: 0;
 	bottom: 0;
 	background-color: rgba(0, 0, 0, 0.5);
-	display: ${props => props.$isOpen ? 'flex' : 'none'};
+	display: flex;
+	opacity: ${props => props.$isOpen ? 1 : 0};
+	visibility: ${props => props.$isOpen ? 'visible' : 'hidden'};
 	z-index: 1000;
+	transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 `;
 
-const ModalContent = styled.div`
+const ModalContent = styled.div<{ $isOpen: boolean }>`
 	background: white;
 	width: 30%;
 	height: 100%;
 	overflow-y: auto;
+	transform: ${props => props.$isOpen ? 'translateX(0)' : 'translateX(-100%)'};
+	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	box-shadow: ${props => props.$isOpen ? '2px 0 8px rgba(0, 0, 0, 0.15)' : 'none'};
 `;
 
 const BackBar = styled.div`
@@ -30,6 +72,11 @@ const NavItem = styled.div`
 	gap: 16px;
 	padding: 8px;
 	align-items: center;
+	transition: background-color 0.2s ease;
+
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.05);
+	}
 `;
 
 const OuterContainer = styled.div`
@@ -87,6 +134,12 @@ const AboutButton = styled.a`
 	padding: 5px 20px;
 	display: inline-block;
 	line-height: normal;
+	transition: all 0.2s ease;
+
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.1);
+		transform: translateY(-1px);
+	}
 `;
 
 const CloseButton = styled.button`
@@ -97,10 +150,11 @@ const CloseButton = styled.button`
 	cursor: pointer;
 	padding: 4px;
 	border-radius: 4px;
-	transition: background-color 0.2s ease;
+	transition: all 0.2s ease;
 
 	&:hover {
 		background-color: rgba(0, 0, 0, 0.1);
+		transform: scale(1.1);
 	}
 `;
 
@@ -125,7 +179,7 @@ export const Sidebar = (props: Props) => {
 
 	return (
 		<ModalOverlay $isOpen={isOpen} onClick={handleOverlayClick}>
-			<ModalContent>
+			<ModalContent $isOpen={isOpen}>
 				<OuterContainer>
 					<SidebarTop>
 						<BackBar>

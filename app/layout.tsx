@@ -12,6 +12,7 @@ import { TopBar } from './top-bar';
 import TastyPasteries from '@/components/tasty-pastries';
 import SessionProvider from '@/components/SessionProvider';
 import AuthWrapper from '@/components/AuthWrapper';
+import { signOut, useSession } from 'next-auth/react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,6 +29,35 @@ const BlogOuter = styled.div`
 		no-repeat right top;
 `;
 
+
+const SignOutButton = styled.button`
+	background: none;
+	border: none;
+	color: #c2c2c2;
+	font: normal 700 100% Ubuntu;
+	line-height: 18px;
+	text-transform: uppercase;
+	padding: 12px 8px;
+	cursor: pointer;
+
+	&:hover {
+		font-size: 18px;
+		text-shadow: 2px 2px 6px black;
+	}
+`;
+
+const UserInfo = styled.div`
+	color: #c2c2c2;
+	font-size: 14px;
+	margin-left: 16px;
+`;
+
+const Title = styled.h1`
+	font-size: 1.5em;
+	text-align: center;
+	color: #bf4f74;
+`;
+
 const Footer = () => {
 	const currentYear = new Date().getFullYear();
 	return (
@@ -40,6 +70,12 @@ const Footer = () => {
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 
+	const { data: session } = useSession();
+
+	const handleSignOut = () => {
+		signOut({ callbackUrl: '/auth/signin' });
+	};
+
 	return (
 		<html lang="en">
 			<head>
@@ -51,6 +87,16 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
 					<TopBar setIsOpen={setIsOpen} />
 					<NavigationBar />
 					<Sidebar setIsOpen={setIsOpen} isOpen={isOpen} />
+					{session?.user && (
+					<>
+						<UserInfo>
+							Welcome, {session.user.name || session.user.email}
+						</UserInfo>
+						<SignOutButton onClick={handleSignOut}>
+							Sign Out
+						</SignOutButton>
+					</>
+				)}
 					{children}
 					<Footer />
 				</BlogOuter>

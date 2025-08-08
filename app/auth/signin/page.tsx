@@ -11,7 +11,6 @@ const SignInContainer = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: #c2b8b2 url('https://blogger.googleusercontent.com/img/a/AVvXsEiONnaLBeEo6C4MZqjqqbk-cYZLqE2yhcCtnlSme81wA_XoS4lL7yjxX2CNDFcK1q58jTTb4kJwu-hLIhQlOETCHnTx6Ka5Wo6xABtF7SLcwV9ZXNQGEAWZhkkzF3H0dLMtC-pfaEJKaKG43BPq0shrg5CxvJqhbIU-zhGOFM83EMTiQ9Eg46r-lQYnrAXS=s1600') no-repeat right top;
 `;
 
 const SignInCard = styled.div`

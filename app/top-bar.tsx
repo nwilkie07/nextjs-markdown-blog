@@ -5,7 +5,6 @@ const TopBarOuter = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	padding: 16px;
-	background-color: #8a716a;
 `;
 
 const IconButton = styled.button`
