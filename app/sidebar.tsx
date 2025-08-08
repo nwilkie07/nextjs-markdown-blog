@@ -1,12 +1,23 @@
-import ReactModal from 'react-modal';
-import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import styled from 'styled-components';
-import Image from 'next/image';
-import CakeRoundedIcon from '@mui/icons-material/CakeRounded';
-import PetsRoundedIcon from '@mui/icons-material/PetsRounded';
-import WineBarRoundedIcon from '@mui/icons-material/WineBarRounded';
-import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
+import React from 'react';
+
+const ModalOverlay = styled.div<{ $isOpen: boolean }>`
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: ${props => props.$isOpen ? 'flex' : 'none'};
+	z-index: 1000;
+`;
+
+const ModalContent = styled.div`
+	background: white;
+	width: 30%;
+	height: 100%;
+	overflow-y: auto;
+`;
 
 const BackBar = styled.div`
 	display: flex;
@@ -49,12 +60,6 @@ const SidebarBottom = styled.div`
 	padding: 16px;
 `;
 
-const Modal = styled(ReactModal)`
-	inset: 0;
-	height: 100%;
-	width: 30%;
-`;
-
 const NavOuter = styled.div`
 	border-top: 1px dashed #c2c2c2;
 	padding-top: 8px;
@@ -84,6 +89,26 @@ const AboutButton = styled.a`
 	line-height: normal;
 `;
 
+const CloseButton = styled.button`
+	background: none;
+	border: none;
+	color: #4e4e4e;
+	font-size: 24px;
+	cursor: pointer;
+	padding: 4px;
+	border-radius: 4px;
+	transition: background-color 0.2s ease;
+
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
+`;
+
+const IconSpan = styled.span`
+	font-size: 20px;
+	color: #c2c2c2;
+`;
+
 interface Props {
 	isOpen: boolean;
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -91,64 +116,73 @@ interface Props {
 
 export const Sidebar = (props: Props) => {
 	const { setIsOpen, isOpen } = props;
+	
+	const handleOverlayClick = (e: React.MouseEvent) => {
+		if (e.target === e.currentTarget) {
+			setIsOpen(false);
+		}
+	};
+
 	return (
-		<Modal isOpen={isOpen} shouldCloseOnOverlayClick={true} onRequestClose={() => setIsOpen(false)} closeTimeoutMS={500}>
-			<OuterContainer>
-				<SidebarTop>
-					<BackBar>
-						<div onClick={() => setIsOpen(false)}>
-							<ArrowBackRoundedIcon />
-						</div>
-					</BackBar>
-					<ProfileOuter>
-						<a href="https://www.blogger.com/profile/12000485798587223853" rel="nofollow">
-							<img
-								alt="My photo"
-								height="120"
-								src="https://mdg.imgix.net/assets/images/san-juan-mountains.jpg?auto=format&fit=clip&q=40&w=1080"
-								width="120"
-								style={{ borderRadius: '50%' }}
-							/>
-						</a>
-						<h5>NICK + JENNA</h5>
-						<AboutButton>About Us</AboutButton>
-					</ProfileOuter>
-					<IntroOuter>
-						<h4>Adventures Abroad</h4>
-						<Intro>
-							Welcome to Nick and Jenna&apos;s Adventure&apos;s Abroad Blog! Enjoy posts about our travel adventures, reviews of
-							all the pastries we&apos;ve tried from local patisseries, and more from our year living on the Franco-Swiss
-							border;
-						</Intro>
-					</IntroOuter>
-				</SidebarTop>
-				<SidebarBottom>
-					<NavOuter>
-						<NavItem>
-							<HomeRoundedIcon />
-							<text>Home</text>
-						</NavItem>
-						<NavItem>
-							<CakeRoundedIcon />
-							<a href="/pastries" style={{ textDecoration: 'none', color: 'inherit' }}>
-								<text>Tasty Pastries</text>
+		<ModalOverlay $isOpen={isOpen} onClick={handleOverlayClick}>
+			<ModalContent>
+				<OuterContainer>
+					<SidebarTop>
+						<BackBar>
+							<CloseButton onClick={() => setIsOpen(false)}>
+								✕
+							</CloseButton>
+						</BackBar>
+						<ProfileOuter>
+							<a href="https://www.blogger.com/profile/12000485798587223853" rel="nofollow">
+								<img
+									alt="My photo"
+									height="120"
+									src="https://mdg.imgix.net/assets/images/san-juan-mountains.jpg?auto=format&fit=clip&q=40&w=1080"
+									width="120"
+									style={{ borderRadius: '50%' }}
+								/>
 							</a>
-						</NavItem>
-						<NavItem>
-							<PetsRoundedIcon />
-							<text>Pets</text>
-						</NavItem>
-						<NavItem>
-							<WineBarRoundedIcon />
-							<text>Wine</text>
-						</NavItem>
-						<NavItem>
-							<EmailRoundedIcon />
-							<text>Subscribe</text>
-						</NavItem>
-					</NavOuter>
-				</SidebarBottom>
-			</OuterContainer>
-		</Modal>
+							<h5>NICK + JENNA</h5>
+							<AboutButton>About Us</AboutButton>
+						</ProfileOuter>
+						<IntroOuter>
+							<h4>Adventures Abroad</h4>
+							<Intro>
+								Welcome to Nick and Jenna&apos;s Adventure&apos;s Abroad Blog! Enjoy posts about our travel adventures,
+								reviews of all the pastries we&apos;ve tried from local patisseries, and more from our year living on
+								the Franco-Swiss border;
+							</Intro>
+						</IntroOuter>
+					</SidebarTop>
+					<SidebarBottom>
+						<NavOuter>
+							<NavItem>
+								<IconSpan>🏠</IconSpan>
+								<text>Home</text>
+							</NavItem>
+							<NavItem>
+								<IconSpan>🍰</IconSpan>
+								<a href="/pastries" style={{ textDecoration: 'none', color: 'inherit' }}>
+									<text>Tasty Pastries</text>
+								</a>
+							</NavItem>
+							<NavItem>
+								<IconSpan>🐾</IconSpan>
+								<text>Pets</text>
+							</NavItem>
+							<NavItem>
+								<IconSpan>🍷</IconSpan>
+								<text>Wine</text>
+							</NavItem>
+							<NavItem>
+								<IconSpan>✉️</IconSpan>
+								<text>Subscribe</text>
+							</NavItem>
+						</NavOuter>
+					</SidebarBottom>
+				</OuterContainer>
+			</ModalContent>
+		</ModalOverlay>
 	);
 };

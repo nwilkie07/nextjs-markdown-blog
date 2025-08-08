@@ -1,25 +1,45 @@
 import styled from 'styled-components';
-import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 
 const TopBarOuter = styled.div`
 	display: flex;
 	justify-content: space-between;
-	padding: 32px 48px;
+	align-items: center;
+	padding: 16px;
+	background-color: #8a716a;
+`;
+
+const IconButton = styled.button`
+	background: none;
+	border: none;
+	color: white;
+	font-size: 24px;
+	cursor: pointer;
+	padding: 8px;
+	border-radius: 4px;
+	transition: background-color 0.2s ease;
+
+	&:hover {
+		background-color: rgba(255, 255, 255, 0.1);
+	}
 `;
 
 interface Props {
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const TopBar = (props: Props) => {
+	const { setIsOpen } = props;
 	return (
 		<TopBarOuter>
-			<div onClick={() => props.setIsOpen(true)}>
-				<MenuRoundedIcon style={{color: 'white'}}/>
+			<div>
+				<IconButton onClick={() => setIsOpen(true)}>
+					☰
+				</IconButton>
 			</div>
-			<div onClick={() => console.log('search blogs posts')}>
-				<SearchRoundedIcon />
+			<div>
+				<IconButton>
+					🔍
+				</IconButton>
 			</div>
 		</TopBarOuter>
 	);

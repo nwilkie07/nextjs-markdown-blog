@@ -1,4 +1,7 @@
+'use client';
+
 import styled from 'styled-components';
+import { useSession, signOut } from 'next-auth/react';
 
 const OuterContainer = styled.div`
 	display: flex;
@@ -15,6 +18,7 @@ const InnerContainer = styled.div`
 	margin: 0 auto;
     padding: 32px 0;
 	gap: 24px;
+	align-items: center;
 `;
 
 const TopElement = styled.div`
@@ -41,6 +45,28 @@ const TopElement = styled.div`
 	}
 `;
 
+const SignOutButton = styled.button`
+	background: none;
+	border: none;
+	color: #c2c2c2;
+	font: normal 700 100% Ubuntu;
+	line-height: 18px;
+	text-transform: uppercase;
+	padding: 12px 8px;
+	cursor: pointer;
+
+	&:hover {
+		font-size: 18px;
+		text-shadow: 2px 2px 6px black;
+	}
+`;
+
+const UserInfo = styled.div`
+	color: #c2c2c2;
+	font-size: 14px;
+	margin-left: 16px;
+`;
+
 const Title = styled.h1`
 	font-size: 1.5em;
 	text-align: center;
@@ -48,6 +74,12 @@ const Title = styled.h1`
 `;
 
 const NavigationBar = () => {
+	const { data: session } = useSession();
+
+	const handleSignOut = () => {
+		signOut({ callbackUrl: '/auth/signin' });
+	};
+
 	return (
 		<OuterContainer>
 			<h1 style={{ fontSize: '45px', color: 'white' }}>Adventures Abroad</h1>
@@ -61,6 +93,16 @@ const NavigationBar = () => {
 				<TopElement>
 					<a href="/subscribe">Subscribe</a>
 				</TopElement>
+				{session?.user && (
+					<>
+						<UserInfo>
+							Welcome, {session.user.name || session.user.email}
+						</UserInfo>
+						<SignOutButton onClick={handleSignOut}>
+							Sign Out
+						</SignOutButton>
+					</>
+				)}
 			</InnerContainer>
 		</OuterContainer>
 	);

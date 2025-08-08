@@ -10,6 +10,8 @@ import NavigationBar from './navigation-bar';
 import { Sidebar } from './sidebar';
 import { TopBar } from './top-bar';
 import TastyPasteries from '@/components/tasty-pastries';
+import SessionProvider from '@/components/SessionProvider';
+import AuthWrapper from '@/components/AuthWrapper';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -35,28 +37,40 @@ const Footer = () => {
 	);
 };
 
-export default function RootLayout({
-	children,
-}: Readonly<{
-	children: React.ReactNode;
-}>) {
+const MainLayout = ({ children }: { children: React.ReactNode }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+
 	return (
 		<html lang="en">
 			<head>
 				{metadata.title && <title>{metadata.title as string}</title>}
 				{metadata.description && <meta name="description" content={metadata.description as string} />}
 			</head>
-				<body style={{padding: "0"}}>
-					<BlogOuter>
+			<body style={{padding: "0"}}>
+				<BlogOuter>
 					<TopBar setIsOpen={setIsOpen} />
 					<NavigationBar />
 					<Sidebar setIsOpen={setIsOpen} isOpen={isOpen} />
 					{children}
 					<Footer />
-					</BlogOuter>
-				</body>
-			
+				</BlogOuter>
+			</body>
 		</html>
+	);
+};
+
+export default function RootLayout({
+	children,
+}: Readonly<{
+	children: React.ReactNode;
+}>) {
+	return (
+		<SessionProvider>
+			<AuthWrapper>
+				<MainLayout>
+					{children}
+				</MainLayout>
+			</AuthWrapper>
+		</SessionProvider>
 	);
 }

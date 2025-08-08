@@ -13,14 +13,13 @@
     "test": "jest"
   },
   "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.3.1",
-    "@mui/material": "^7.3.1",
-    "@mui/styled-engine-sc": "^7.3.1",
+    "@auth/core": "^0.40.0",
+    "@next-auth/prisma-adapter": "^1.0.7",
     "gray-matter": "^4.0.3",
+    "jose": "^6.0.12",
     "modal": "^0.3.15",
     "next": "14.2.4",
+    "next-auth": "^4.24.11",
     "pure-react-carousel": "^1.32.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
