@@ -2,5 +2,5 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'My Blog',
-  description: 'Created by A.Z.',
+  description: 'Created by Nicholas Wilkie and A.Z.',
 };

@@ -11,24 +11,34 @@ import ListItemNode from '@/utils/markdownRenderers/ListItemNode';
 import Paragraph from '@/utils/markdownRenderers/Paragraph';
 import Preformatted from '@/utils/markdownRenderers/Preformatted';
 import { Components } from 'react-markdown';
+// Import Swiper React components
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import "/Users/nicholaswilkie/nextjs-markdown-blog/components/Markdown.css"
+
+// Import Swiper styles
+import 'swiper/css';
 
 interface MarkdownProps {
 	children: string;
 }
 
-const inlineCodeStyle = {
-	backgroundColor: '#f0f0f0',
-	padding: '2px 4px',
-	borderRadius: '4px',
-	fontFamily: 'monospace',
-	fontSize: '0.875rem',
-};
-
 const renderInlineCode = ({ children, ...props }: any) => {
+	const imageArray = children.toString().split('\n');
+
 	return (
-		<code style={inlineCodeStyle} {...props}>
-			{children}
-		</code>
+		<CarouselProvider naturalSlideWidth={100} naturalSlideHeight={125} totalSlides={3} visibleSlides={1} isIntrinsicHeight>
+			<Slider>
+				{imageArray.map((pic: string, index: number) => {
+					return (
+						<Slide className='slide' key={index} index={index} >
+							<ImageNode alt={''} src={pic} />
+						</Slide>
+					);
+				})}
+			</Slider>
+			<ButtonBack>Back</ButtonBack>
+			<ButtonNext>Next</ButtonNext>
+		</CarouselProvider>
 	);
 };
 

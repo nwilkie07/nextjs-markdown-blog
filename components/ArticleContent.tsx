@@ -2,32 +2,38 @@
 
 import React from 'react';
 import Markdown from '@/components/Markdown';
-import ShareButtons from '@/components/ShareButtons';
 import styles from './ArticleContent.module.css';
+import styled from 'styled-components';
 
 interface ArticleContentProps {
-    articleContent: string | null;
-    articleTitle: string;
-    folder: string;
-    loading: boolean;
-    slug: string;
+	articleContent: string | null;
+	articleTitle: string;
+	folder: string;
+	loading: boolean;
+	slug: string;
 }
 
+const Article = styled.div`
+	display: flex;
+	flex-direction: column;
+	background: white;
+	padding: 16px;
+	border-radius: 16px;
+	border: 2px solid white;
+`;
+
 const ArticleContent: React.FC<ArticleContentProps> = ({ articleContent, articleTitle, folder, loading, slug }) => {
-    return (
-        <main>
-            {loading ? (
-                <div className={styles.loaderWrapper}>
-                    <div className={styles.spinner} data-testid="spinner"></div>
-                </div>
-            ) : (
-                <article>
-                    <ShareButtons title={articleTitle} url={`${process.env.NEXT_PUBLIC_BASE_URL}/${folder}/${slug}`} />
-                    {articleContent ? <Markdown>{articleContent}</Markdown> : <p>Article not found.</p>}
-                </article>
-            )}
-        </main>
-    );
+	return (
+		<main>
+			{loading ? (
+				<div className={styles.loaderWrapper}>
+					<div className={styles.spinner} data-testid="spinner"></div>
+				</div>
+			) : (
+				<Article>{articleContent ? <Markdown>{articleContent}</Markdown> : <p>Article not found.</p>}</Article>
+			)}
+		</main>
+	);
 };
 
 export default ArticleContent;
