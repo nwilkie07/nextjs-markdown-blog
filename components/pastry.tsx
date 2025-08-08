@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-const Text = styled.text`
+const Text = styled.span`
 	font-size: 28;
 	color: rgb(116, 27, 71);
 `;
 
-const Title = styled.text`
+const Title = styled.span`
 	font-size: 28;
 	color: rgb(116, 27, 71);
 	font-weight: 500;

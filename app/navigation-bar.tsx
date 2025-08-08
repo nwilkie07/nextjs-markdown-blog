@@ -1,6 +1,8 @@
 'use client';
 
 import styled from 'styled-components';
+import { signOut, useSession } from 'next-auth/react';
+
 
 const OuterContainer = styled.div`
 	display: flex;
@@ -45,7 +47,40 @@ const TopElement = styled.div`
 `;
 
 
+const SignOutButton = styled.button`
+	background: none;
+	border: none;
+	color: #c2c2c2;
+	font: normal 700 100% Ubuntu;
+	line-height: 18px;
+	text-transform: uppercase;
+	padding: 12px 8px;
+	cursor: pointer;
+
+	&:hover {
+		font-size: 18px;
+		text-shadow: 2px 2px 6px black;
+	}
+`;
+
+const UserInfo = styled.div`
+	color: #c2c2c2;
+	font-size: 14px;
+	margin-left: 16px;
+`;
+
+const Title = styled.h1`
+	font-size: 1.5em;
+	text-align: center;
+	color: #bf4f74;
+`;
+
 const NavigationBar = () => {
+	const { data: session } = useSession();
+
+	const handleSignOut = () => {
+		signOut({ callbackUrl: '/auth/signin' });
+	};
 
 	return (
 		<OuterContainer>
@@ -60,7 +95,16 @@ const NavigationBar = () => {
 				<TopElement>
 					<a href="/subscribe">Subscribe</a>
 				</TopElement>
-				
+				{session?.user && (
+					<>
+						<UserInfo>
+							Welcome, {session.user.name || session.user.email}
+						</UserInfo>
+						<SignOutButton onClick={handleSignOut}>
+							Sign Out
+						</SignOutButton>
+					</>
+				)}
 			</InnerContainer>
 		</OuterContainer>
 	);

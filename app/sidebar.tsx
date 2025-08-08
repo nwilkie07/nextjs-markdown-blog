@@ -213,25 +213,25 @@ export const Sidebar = (props: Props) => {
 						<NavOuter>
 							<NavItem>
 								<IconSpan>🏠</IconSpan>
-								<text>Home</text>
+								<span>Home</span>
 							</NavItem>
 							<NavItem>
 								<IconSpan>🍰</IconSpan>
 								<a href="/pastries" style={{ textDecoration: 'none', color: 'inherit' }}>
-									<text>Tasty Pastries</text>
+									<span>Tasty Pastries</span>
 								</a>
 							</NavItem>
 							<NavItem>
 								<IconSpan>🐾</IconSpan>
-								<text>Pets</text>
+								<span>Pets</span>
 							</NavItem>
 							<NavItem>
 								<IconSpan>🍷</IconSpan>
-								<text>Wine</text>
+								<span>Wine</span>
 							</NavItem>
 							<NavItem>
 								<IconSpan>✉️</IconSpan>
-								<text>Subscribe</text>
+								<span>Subscribe</span>
 							</NavItem>
 						</NavOuter>
 					</SidebarBottom>
