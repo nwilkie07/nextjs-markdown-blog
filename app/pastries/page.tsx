@@ -1,6 +1,10 @@
-import { getPastryMetadata } from '@/utils/getPastryMetadata';
+'use client';
+
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useState, useEffect } from 'react';
+import { Pastry, PastryProps } from '@/components/pastry';
+
 
 const PastriesContainer = styled.div`
 	display: grid;
@@ -64,8 +68,74 @@ const StyledReview = styled.p`
 `;
 
 export default function PastriesPage() {
-  const pastries = getPastryMetadata('pasteries'); // Note: using the existing directory name
+  const [pastries, setPastries] = useState<PastryProps[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
+  useEffect(() => {
+    const fetchPastries = async () => {
+      try {
+        const response = await fetch('/api/pastries');
+        if (!response.ok) {
+          throw new Error('Failed to fetch pastries');
+        }
+        const data = await response.json();
+        setPastries(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPastries();
+  }, []);
+
+  if (loading) {
+    return (
+      <div>
+        <h1 style={{
+          color: '#bf4f74',
+          fontSize: '2.5rem',
+          marginBottom: '1rem',
+          textAlign: 'center'
+        }}>
+          Tasty Pastries
+        </h1>
+        <p style={{
+          textAlign: 'center',
+          color: '#666',
+          fontStyle: 'italic',
+          margin: '2rem 0'
+        }}>
+          Loading pastries...
+        </p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <h1 style={{
+          color: '#bf4f74',
+          fontSize: '2.5rem',
+          marginBottom: '1rem',
+          textAlign: 'center'
+        }}>
+          Tasty Pastries
+        </h1>
+        <p style={{
+          textAlign: 'center',
+          color: '#d32f2f',
+          margin: '2rem 0'
+        }}>
+          Error: {error}
+        </p>
+      </div>
+    );
+  }
+  
   return (
     <div>
       <StyledH1>

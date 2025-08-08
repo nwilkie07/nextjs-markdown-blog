@@ -1,6 +1,9 @@
+'use client';
+
 import { getPastryMetadata } from '@/utils/getPastryMetadata';
 import Link from 'next/link';
 import styled from 'styled-components';
+
 
 const PastryContainer = styled.div`
 	max-width: 800px;

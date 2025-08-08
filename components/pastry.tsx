@@ -34,15 +34,16 @@ const TextGrid = styled.div`
 	gap: 8px;
 `;
 
-interface Props {
+export interface PastryProps {
     name: string;
     seller: string;
     rating: string;
     review: string;
     image: string;
+	slug: string;
 }
 
-export const Pastry = (props: Props) => {
+export const Pastry = (props: PastryProps) => {
     const {name, seller, rating, review, image} = props;
 	return (
 		<div style={{ display: 'flex', gap: '16px', width: '100%' }}>
