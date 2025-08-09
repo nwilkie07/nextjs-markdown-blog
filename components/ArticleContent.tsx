@@ -1,9 +1,9 @@
-'use client'; // Mark this component as client-side
-
-import React from 'react';
+'use client';
+import React, { Suspense, use, useEffect } from 'react';
 import Markdown from '@/components/Markdown';
 import styles from './ArticleContent.module.css';
 import styled from 'styled-components';
+import getImagesFromR2 from '@/app/api/r2/files/imageSearch';
 
 interface ArticleContentProps {
 	articleContent: string | null;
@@ -11,6 +11,7 @@ interface ArticleContentProps {
 	folder: string;
 	loading: boolean;
 	slug: string;
+	key: string;
 }
 
 const Article = styled.div`
@@ -22,16 +23,37 @@ const Article = styled.div`
 	border: 2px solid white;
 `;
 
-const ArticleContent: React.FC<ArticleContentProps> = ({ articleContent, articleTitle, folder, loading, slug }) => {
+const ArticleContent: React.FC<ArticleContentProps> = ({
+	articleContent,
+	articleTitle,
+	folder,
+	loading,
+	slug,
+	key,
+}) => {
+	const images = getImagesFromR2();
+
 	return (
 		<main>
-			{loading ? (
-				<div className={styles.loaderWrapper}>
-					<div className={styles.spinner} data-testid="spinner"></div>
-				</div>
-			) : (
-				<Article>{articleContent ? <Markdown>{articleContent}</Markdown> : <p>Article not found.</p>}</Article>
-			)}
+			<Suspense
+				fallback={
+					<div className={styles.loaderWrapper}>
+						<div className={styles.spinner} data-testid="spinner"></div>
+					</div>
+				}
+			>
+				<Article>
+					{articleContent ? (
+						<Markdown
+							images={images}
+						>
+							{articleContent}
+						</Markdown>
+					) : (
+						<p>Article not found.</p>
+					)}
+				</Article>
+			</Suspense>
 		</main>
 	);
 };

@@ -13,6 +13,7 @@ const getArticleMetadata = (basePath: string) => {
             title: matterResult.data.title,
             date: matterResult.data.date,
             bio: matterResult.data.description,
+            key: matterResult.data.key,
             slug: filename.replace('.md', ''),
         }
     })

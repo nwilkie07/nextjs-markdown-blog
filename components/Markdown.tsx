@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+import React, { use } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import CodeBlock from '@/utils/markdownRenderers/CodeBlock';
@@ -17,21 +18,48 @@ import "/Users/nicholaswilkie/nextjs-markdown-blog/components/Markdown.css"
 
 // Import Swiper styles
 import 'swiper/css';
+import rehypeRaw from 'rehype-raw';
+import { R2File } from '@/app/api/r2/files/imageSearch';
 
 interface MarkdownProps {
 	children: string;
+	images: Promise<R2File[]>;
 }
 
 const renderInlineCode = ({ children, ...props }: any) => {
-	const imageArray = children.toString().split('\n');
+	const serverPromise: R2File[] = use(props.images);
+	const serverImages = serverPromise.reduce((acc, file) => {
+		// Use both file.name and file.key for matching flexibility
+		acc[file.name] = file;
+		acc[file.key] = file;
+		// Also try just the filename without path
+		const filename = file.key.split('/').pop();
+		if (filename) {
+			acc[filename] = file;
+		}
+		return acc;
+	}, {} as Record<string, R2File>);
+	const selectedImages: string[] = children.toString().split('\n').filter((img: string) => img.trim());
+
 
 	return (
 		<CarouselProvider naturalSlideWidth={100} naturalSlideHeight={125} totalSlides={3} visibleSlides={1} isIntrinsicHeight>
 			<Slider>
-				{imageArray.map((pic: string, index: number) => {
+				{selectedImages.map((fileName: string, index: number) => {
+					const trimmedFileName = fileName.trim();
+					const file = serverImages[trimmedFileName];
+					const url = file?.url ?? "";
+					
+					
 					return (
 						<Slide className='slide' key={index} index={index} >
-							<ImageNode alt={''} src={pic} />
+							{url ? (
+								<ImageNode alt={file?.name || trimmedFileName} src={url} />
+							) : (
+								<div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
+									Image not found: {trimmedFileName}
+								</div>
+							)}
 						</Slide>
 					);
 				})}
@@ -81,13 +109,25 @@ const renderers: Components = {
 			{children}
 		</ListNode>
 	),
-	p: ({ children, ...props }) => <Paragraph {...props}>{children}</Paragraph>,
+	span: ({ children, ...props }) => <span style={{color: ' #0b5394'}} {...props}>{children}</span>,
 	pre: ({ children, ...props }) => <Preformatted {...props}>{children}</Preformatted>,
+	p: ({ children, ...props }) => <Paragraph {...props} {...props}>{children}</Paragraph>,
 };
 
-const Markdown: React.FC<MarkdownProps> = ({ children }) => {
+const Markdown: React.FC<MarkdownProps> = ({ children, images }) => {	
+	// Create renderers with access to images
+	const renderersWithImages: Components = {
+		...renderers,
+		code: ({ className, children, ...props }) =>
+			className ? <CodeBlock className={className}>{children}</CodeBlock> : renderInlineCode({ children, images, ...props }),
+	};
+	
 	return (
-		<ReactMarkdown components={renderers} remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>
+		<ReactMarkdown
+			components={renderersWithImages}
+			remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
+			rehypePlugins={[rehypeRaw]}
+		>
 			{children}
 		</ReactMarkdown>
 	);
